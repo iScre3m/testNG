@@ -47,9 +47,9 @@ public class TestNG {
         boolean divisible2 = testClass.isDivisible(7, 2);
         boolean divisible3 = testClass.isDivisible(9.15, 3.05);
 
-        Assert.assertEquals(divisible1, true);
-        Assert.assertEquals(divisible2, true);
-        Assert.assertEquals(divisible3, false);
+        Assert.assertTrue(divisible1);
+        Assert.assertTrue(divisible2);
+        Assert.assertFalse(divisible3);
     }
 
     @Test(groups = {"text tests"})
