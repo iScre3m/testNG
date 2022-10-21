@@ -52,7 +52,7 @@ public class TestNG {
         Assert.assertEquals(divisible3, false);
     }
 
-    @Test(groups = {"text"})
+    @Test(groups = {"text tests"})
     public void testHelloWorld() {
         String text = testClass.text();
         Assert.assertEquals(text, "testNG");
