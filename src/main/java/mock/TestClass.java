@@ -1,4 +1,4 @@
-package com.solvd.demo;
+package mock;
 
 public class TestClass {
 

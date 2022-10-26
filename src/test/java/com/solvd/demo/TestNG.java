@@ -1,30 +1,42 @@
 package com.solvd.demo;
 
+import mock.TestClass;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 
 public class TestNG {
 
 
     private final Logger LOGGER = LogManager.getLogger(TestNG.class);
-    TestClass testClass;
-    int[] numbers;
-    int[] evenNumbers;
-    int[] oddNumbers;
+    private TestClass testClass;
+    private int[] numbers;
+    private int[] evenNumbers;
+    private int[] oddNumbers;
 
-    @BeforeClass(alwaysRun = true)
-    public void BeforeClassMethod() {
-        LOGGER.info("Before class method");
+    private int number1;
+    private int number2;
+
+    @BeforeMethod
+    public void assignNumbers() {
+        number1 = 5;
+        number2 = 10;
+    }
+
+    @BeforeClass
+    public void beforeClass() {
+        LOGGER.info("Before class");
 
         numbers = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         evenNumbers = new int[]{2, 4, 6, 8, 10};
         oddNumbers = new int[]{1, 3, 5, 7, 9};
+    }
+
+    @AfterClass
+    public void afterClass() {
+        LOGGER.info("After class");
     }
 
     @Test(groups = {"calculate"})
@@ -41,32 +53,43 @@ public class TestNG {
     }
 
     @Test(groups = {"calculate"})
+    public void testNumbers() {
+        Assert.assertTrue(number1 + 5 == number2);
+    }
+
+    @Test(groups = {"calculate"})
     public void testDivision() {
 
         boolean divisible1 = testClass.isDivisible(10, 2);
         boolean divisible2 = testClass.isDivisible(7, 2);
         boolean divisible3 = testClass.isDivisible(9.15, 3.05);
+        String message = "Expected the first number to be divided by the second number";
 
-        Assert.assertTrue(divisible1);
-        Assert.assertTrue(divisible2);
-        Assert.assertFalse(divisible3);
+        Assert.assertTrue(divisible1, message);
+        Assert.assertTrue(divisible2, message);
+        Assert.assertFalse(divisible3, message);
     }
 
     @Test(groups = {"text tests"})
-    public void testHelloWorld() {
+    public void testText() {
         String text = testClass.text();
-        Assert.assertEquals(text, "testNG");
+        Assert.assertEquals(text, "testNG", "Expected the text to be equals to testNG");
     }
 
-    @BeforeSuite(alwaysRun = true)
-    public void BeforeSuite() {
+    @BeforeSuite
+    public void beforeSuite() {
         LOGGER.info("Before suite");
     }
 
-    @BeforeTest(alwaysRun = true)
-    public void BeforeTest() {
+    @BeforeTest
+    public void beforeTest() {
         LOGGER.info("Before test");
         testClass = new TestClass();
+    }
+
+    @AfterTest
+    public void afterTest() {
+        LOGGER.info("After test");
     }
 
 }
