@@ -70,10 +70,11 @@ public class TestNG {
         Assert.assertFalse(divisible3, message);
     }
 
-    @Test(groups = {"text"})
-    public void testText() {
+    @Test(groups = {"text"}, timeOut = 1000)
+    public void testText() throws InterruptedException {
         String text = testClass.text();
         Assert.assertEquals(text, "testNG", "Expected the text to be equals to testNG");
+        Thread.sleep(1001);
     }
 
     @BeforeSuite
