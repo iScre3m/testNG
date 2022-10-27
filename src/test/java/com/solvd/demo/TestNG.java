@@ -70,7 +70,7 @@ public class TestNG {
         Assert.assertFalse(divisible3, message);
     }
 
-    @Test(groups = {"text tests"})
+    @Test(groups = {"text"})
     public void testText() {
         String text = testClass.text();
         Assert.assertEquals(text, "testNG", "Expected the text to be equals to testNG");
